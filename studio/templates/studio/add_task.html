@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% load thumbnail %}
+
+{% block title %}{{ block.super }}{{task.name}}{% endblock %}
+
+{% block container %}
+<div class='container'>
+	<h1 class="profile-head">Add Task</h1>
+		<form enctype="multipart/form-data" method="post">
+			{% csrf_token %}
+			{% crispy task_form%} 
+		</form>
+</div>
+</div>
+{% endblock %}
+
+<script>
+	$('.datepicker').datepicker();
+</script>

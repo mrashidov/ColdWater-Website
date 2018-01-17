@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load thumbnail %}
+
+{% block title %}
+{{ block.super }}{{task.name}}
+{% endblock %}
+
+<!-- Benefits of the Django application -->
+{% block container %}
+<div class='container'>
+	<h1 class="profile-head">{{task.name}}</h1>
+	<ul class='list-group'>
+		<li class='list-group-item'><b>Name: </b>{{task.name}}</li>
+		<li class='list-group-item'><b>Task created: </b>{{task.date_expired}}</li>
+		<li class='list-group-item'><b>Expiration date: </b>{{task.date_expired}}</li>
+		<li class='list-group-item'><b>Description: </b> {{task.description}} </li>
+		<li class='list-group-item col-sm-3'><b>Cancelled: </b>
+			  {% if task.is_cancelled %}
+			    <span class="glyphicon glyphicon-ok-circle" aria-hidden="true" title="This task is cancelled"></span>
+			    <span class="sr-only">Cancelled</span>
+			  {% else %}
+			    <span class="glyphicon glyphicon-warning-sign" aria-hidden="true" title="This task is not cancelled"></span>
+			    <span class="sr-only">Not cancelled</span>
+			  {% endif %}
+		</li>
+		<li class='list-group-item col-sm-3'><b>Rejected: </b>
+			  {% if task.is_rejected %}
+			    <span class="glyphicon glyphicon-ok-circle" aria-hidden="true" title="This task is Rejected. Contact us for details."></span>
+			    <span class="sr-only">Rejected</span>
+			  {% else %}
+			    <span class="glyphicon glyphicon-warning-sign" aria-hidden="true" title="This task is not rejected"></span>
+			    <span class="sr-only">Not rejected</span>
+			  {% endif %}
+		</li>
+		<li class='list-group-item col-sm-3'><b>In progress: </b>
+			  {% if task.in_progress %}
+			    <span class="glyphicon glyphicon-ok-circle" aria-hidden="true" title="This task is in progress"></span>
+			    <span class="sr-only">In progress</span>
+			  {% else %}
+			    <span class="glyphicon glyphicon-warning-sign" aria-hidden="true" title="This task is queued"></span>
+			    <span class="sr-only">Queued</span>
+			  {% endif %}
+		</li>
+		<li class='list-group-item col-sm-3'><b>Complete: </b>
+			  {% if task.is_complete %}
+			    <span class="glyphicon glyphicon-ok-circle" aria-hidden="true" title="This task is complete"></span>
+			    <span class="sr-only">Complete</span>
+			  {% else %}
+			    <span class="glyphicon glyphicon-warning-sign" aria-hidden="true" title="This task is not complete yet."></span>
+			    <span class="sr-only">Not complete</span>
+			  {% endif %}
+		</li>
+		{% if task.date_finished %}
+		<li class='list-group-item col-sm-12'><b>Finished in: </b> {{task.date_finished}} </li>
+		{% endif %}
+		{% include 'studio/buttons.html' %}
+	</ul>
+</div>
+
+{% endblock %}
+
+

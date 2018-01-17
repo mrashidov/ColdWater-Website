@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% load thumbnail %}
+
+{% block title %}{{ block.super }}{{task.name}}{% endblock %}
+
+{% block container %}
+<div class='container'>
+	<h1 class="profile-head">Edit Task</h1>
+		<form enctype="multipart/form-data" method="post">
+			{% crispy task_form | crispy %} 
+		</form>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% if user.is_staff %}
+{% comment %} We add following set of buttons for staff:
+			>complete
+			>reject
+			{% endcomment %}
+
+<form method="POST" action='{% url "studio:show" task.slug %}'>
+{% csrf_token %}
+{% if not task.is_rejected %}
+	
+	{% if not task.is_complete %}
+		{% if not task.in_progress %}
+			<button class='btn btn-xs btn-primary addlink' name='in_progress' value='true'>Process</button>
+		{% endif %}
+		<button class='btn btn-xs btn-danger addlink' name='reject' value='true'>Reject</button>
+		<button class='btn btn-xs btn-success addlink' name='complete' value='true' >Complete</button>
+	{%endif %}
+{% endif %}
+</form>
+
+{%else%}
+{% comment %}We add following set of as for clients:
+			>cancel
+			>edit
+			{% endcomment %}
+{% if not task.is_cancelled %}
+<form method="POST" action='{% url "studio:show" task.slug %}'>
+{% csrf_token %}
+<button class='btn btn-xl addlink btn-danger' name='cancel'  value="true" >Cancel</button>
+</form>
+{% endif %}
+{%endif%}
